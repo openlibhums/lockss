@@ -1,0 +1,23 @@
+{% load static from staticfiles %}
+
+<html>
+    <head>
+        <title>CLOCKSS Preservation - {{ current_year }}</title>
+        <link href="{% static "dist/css/app.css" %}" rel="stylesheet">
+        {% if request.journal %}<link href="{% static "dist/css/journal" %}{{ request.journal.id }}_override.css" rel="stylesheet">{% endif %}
+    </head>
+    <body>
+        <div class="row">
+            <div class="columns-12 large">
+                <h3>CLOCKSS Manifest - {{ current_year }}</h3>
+                <h5>Archive of Issues - {{ current_year }}</h5>
+                <ul>{% for issue in issues %}
+                    <li>{{ issue }}</li>{% endfor %}
+                </ul>
+                <h5>Archive of Articles - {{ current_year }}</h5>
+                <ul>{% for article in articles %}
+                    <li>{{ article.title }}{% endfor %}</li></ul>
+            </div>
+        </div>
+    </body>
+</html>
