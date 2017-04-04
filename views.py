@@ -12,6 +12,17 @@ def index(request):
     else:
         current_year = request.GET.get('year')
 
+    if int(current_year) == timezone.now().year:
+        next = False
+        previous = int(current_year) - 1
+    else:
+        next = int(current_year) + 1
+        previous = int(current_year) - 1
+
+    check_for_issues_in_previous_years = models.Issue.objects.filter(date__year__lte=previous)
+    if not check_for_issues_in_previous_years:
+        previous = None
+
     issues = models.Issue.objects.filter(date__year=current_year)
     articles = submission_models.Article.objects.filter(date_published__year=current_year)
 
@@ -20,6 +31,9 @@ def index(request):
         'issues': issues,
         'articles': articles,
         'current_year': current_year,
+        'next': next,
+        'previous': previous,
+
     }
 
     return render(request, template, context)

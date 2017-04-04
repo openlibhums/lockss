@@ -10,6 +10,8 @@
         <div class="row">
             <div class="columns-12 large">
                 <h3>CLOCKSS Manifest - {{ current_year }}</h3>
+                 <p>{% if previous %}<a href="{% url 'index' %}?year={{ previous }}">Previous</a>{% endif %}{% if previous and next %} -- {% endif %}{% if next %}<a href="{% url 'index' %}?year={{ next }}">Next</a>{% endif %}</p>
+
                 <h5>Archive of Issues - {{ current_year }}</h5>
                 <ul>{% for issue in issues %}
                     <li>{{ issue }}</li>{% endfor %}
