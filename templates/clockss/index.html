@@ -14,11 +14,11 @@
 
                 <h5>Archive of Issues - {{ current_year }}</h5>
                 <ul>{% for issue in issues %}
-                    <li>{{ issue }}</li>{% endfor %}
+                    <li><a href="{% url 'journal_issue' issue.id %}">{{ issue }}</a></li>{% endfor %}
                 </ul>
                 <h5>Archive of Articles - {{ current_year }}</h5>
                 <ul>{% for article in articles %}
-                    <li>{{ article.title }}{% endfor %}</li>
+                    <li><a href="{% url 'article_print_article' 'id' article.pk %}">{{ article.title }}</a>{% endfor %}</li>
                 </ul>
                 <h3>Metadata</h3>
                 <table>

@@ -19,12 +19,15 @@ def index(request):
         next = int(current_year) + 1
         previous = int(current_year) - 1
 
-    check_for_issues_in_previous_years = models.Issue.objects.filter(date__year__lte=previous)
+    check_for_issues_in_previous_years = models.Issue.objects.filter(date__year__lte=previous,
+                                                                     journal=request.journal)
     if not check_for_issues_in_previous_years:
         previous = None
 
-    issues = models.Issue.objects.filter(date__year=current_year)
-    articles = submission_models.Article.objects.filter(date_published__year=current_year)
+    issues = models.Issue.objects.filter(date__year=current_year,
+                                         journal=request.journal)
+    articles = submission_models.Article.objects.filter(date_published__year=current_year,
+                                                        journal=request.journal)
 
     template = 'clockss/index.html'
     context = {
