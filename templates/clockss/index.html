@@ -16,7 +16,31 @@
                 </ul>
                 <h5>Archive of Articles - {{ current_year }}</h5>
                 <ul>{% for article in articles %}
-                    <li>{{ article.title }}{% endfor %}</li></ul>
+                    <li>{{ article.title }}{% endfor %}</li>
+                </ul>
+                <h3>Metadata</h3>
+                <table>
+                    <tr>
+                        <th>Journal URL</th>
+                        <td>{{ request.journal_base_url }}</td>
+                    </tr>
+                    <tr>
+                        <th>Title</th>
+                        <td>{{ request.journal.name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Publisher</th>
+                        <td>{{ journal_settings.general.publisher_name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td>{{ journal_settings.general.journal_description|safe }}</td>
+                    </tr>
+                    <tr>
+                        <th>Copyright</th>
+                        <td>{{ journal_settings.general.copyright_notice|safe }}</td>
+                    </tr>
+                </table>
             </div>
         </div>
     </body>
