@@ -1,49 +1,59 @@
 {% load static from staticfiles %}
-
 <html>
-    <head>
-        <title>CLOCKSS Preservation - {{ current_year }}</title>
-        <link href="{% static "dist/css/app.css" %}" rel="stylesheet">
-        {% if request.journal %}<link href="{% static "dist/css/journal" %}{{ request.journal.id }}_override.css" rel="stylesheet">{% endif %}
-    </head>
-    <body>
-        <div class="row">
-            <div class="columns-12 large">
-                <h3>CLOCKSS Manifest - {{ current_year }}</h3>
-                 <p>{% if previous %}<a href="{% url 'index' %}?year={{ previous }}">Previous</a>{% endif %}{% if previous and next %} -- {% endif %}{% if next %}<a href="{% url 'index' %}?year={{ next }}">Next</a>{% endif %}</p>
 
-                <h5>Archive of Issues - {{ current_year }}</h5>
-                <ul>{% for issue in issues %}
-                    <li><a href="{% url 'journal_issue' issue.id %}">{{ issue }}</a></li>{% endfor %}
-                </ul>
-                <h5>Archive of Articles - {{ current_year }}</h5>
-                <ul>{% for article in articles %}
-                    <li><a href="{% url 'article_print_article' 'id' article.pk %}">{{ article.title }}</a>{% endfor %}</li>
-                </ul>
-                <h3>Metadata</h3>
-                <table>
-                    <tr>
-                        <th>Journal URL</th>
-                        <td>{{ request.journal_base_url }}</td>
-                    </tr>
-                    <tr>
-                        <th>Title</th>
-                        <td>{{ request.journal.name }}</td>
-                    </tr>
-                    <tr>
-                        <th>Publisher</th>
-                        <td>{{ journal_settings.general.publisher_name }}</td>
-                    </tr>
-                    <tr>
-                        <th>Description</th>
-                        <td>{{ journal_settings.general.journal_description|safe }}</td>
-                    </tr>
-                    <tr>
-                        <th>Copyright</th>
-                        <td>{{ journal_settings.general.copyright_notice|safe }}</td>
-                    </tr>
-                </table>
+<head>
+    <title>LOCKSS Preservation - {{ current_year }}</title>
+    <link href="{% static "OLH/css/app.css" %}" rel="stylesheet">
+</head>
+
+<body>
+    <div class="row container">
+        <div class="columns-12 large">
+            <h3>LOCKSS Manifest - {{ current_year }}</h3>
+            <p>{% if previous %}<a href="{% url 'index' %}?year={{ previous }}">Previous</a>{% endif %}{% if previous and next %} -- {% endif %}{% if next %}<a href="{% url 'index' %}?year={{ next }}">Next</a>{% endif %}</p>
+            <h5>Archive of Issues - {{ current_year }}</h5>
+            <ul>{% for issue in issues %}
+                <li><a href="{% url 'journal_issue' issue.id %}">{{ issue }}</a></li>{% endfor %}
+            </ul>
+            <h5>Archive of Articles - {{ current_year }}</h5>
+            <ul>{% for article in articles %}
+                <li><a href="{% url 'article_print_article' 'id' article.pk %}">{{ article.title|safe }}</a>{% endfor %}</li>
+            </ul>
+            <h3>Metadata</h3>
+            <table class="table table-striped table-bordered">
+                <tr>
+                    <th>Journal URL</th>
+                    <td>{{ request.journal_base_url }}</td>
+                </tr>
+                <tr>
+                    <th>Title</th>
+                    <td>{{ request.journal.name }}</td>
+                </tr>
+                <tr>
+                    <th>Publisher</th>
+                    <td>{{ journal_settings.general.publisher_name }}</td>
+                </tr>
+                <tr>
+                    <th>Description</th>
+                    <td>{{ journal_settings.general.journal_description|safe }}</td>
+                </tr>
+                <tr>
+                    <th>Copyright</th>
+                    <td>{{ journal_settings.general.copyright_notice|safe }}</td>
+                </tr>
+            </table>
+
+            <div class="large-1 columns">
+                <a href="http://lockss.org/"><img src="http://poetry.openlibhums.org/jms/templates/images/lockss.gif" style="border: 0;" alt="LOCKSS"></a>
+            </div>
+
+            <div class="large-9 columns end">
+                <br>
+                <p>LOCKSS system has permission to collect, preserve, and serve this Archival Unit.</p>
+                <p></p>
             </div>
         </div>
-    </body>
+    </div>
+</body>
+
 </html>
