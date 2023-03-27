@@ -1,9 +1,10 @@
 PLUGIN_NAME = 'Clockss Plugin'
 DESCRIPTION = 'CLOCKSS preservation plugin'
 AUTHOR = 'Andy Byers'
-VERSION = '1.0'
+VERSION = '1.1'
 SHORT_NAME = 'clockss'
 MANAGER_URL = None
+JANEWAY_VERSION = "1.5.0"
 
 from utils import models
 
